@@ -1,0 +1,222 @@
+<h1>
+  All #<%= @the_all.id %> details
+</h1>
+
+<div>
+  <a href="/directors">
+    Go back
+  </a>
+</div>
+
+<div>
+  <a href="/delete_all/<%= @the_all.id %>">
+    Delete item
+  </a>
+</div>
+
+<hr>
+
+<form action="/modify_all/<%= @the_all.id %>" method="post">
+  <div>
+    <label for="name_box">
+      Name
+    </label>
+
+    <input type="text" id="name_box" name="query_name" value="<%= @the_all.name %>">
+  </div>
+
+  <div>
+    <label for="space_box">
+      Space
+    </label>
+
+    <input type="text" id="space_box" name="query_space" value="<%= @the_all.space %>">
+  </div>
+
+  <div>
+    <label for="original_price_box">
+      Original price
+    </label>
+
+    <textarea id="original_price_box" name="query_original_price" rows="3"><%= @the_all.original_price %></textarea>
+  </div>
+
+  <div>
+    <label for="selling_price_box">
+      Selling price
+    </label>
+
+    <textarea id="selling_price_box" name="query_selling_price" rows="3"><%= @the_all.selling_price %></textarea>
+  </div>
+
+  <div>
+    <label for="brand_box">
+      Brand
+    </label>
+
+    <textarea id="brand_box" name="query_brand" rows="3"><%= @the_all.brand %></textarea>
+  </div>
+
+  <div>
+    <label for="description_box">
+      Description
+    </label>
+
+    <textarea id="description_box" name="query_description" rows="3"><%= @the_all.description %></textarea>
+  </div>
+
+    <div>
+    <label for="owner_box">
+      Owner
+    </label>
+
+    <textarea id="owner_box" name="query_owner" rows="3"><%= @the_all.owner %></textarea>
+  </div>
+
+  <div>
+    <label for="image_box">
+      Image
+    </label>
+
+    <input type="text" id="image_box" name="query_image" value="<%= @the_all.image %>">
+  </div>
+
+  <button>
+    Update item
+  </button>
+</form>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @the_all.name %>
+  </dd>
+
+  <dt>
+    Space
+  </dt>
+  <dd>
+    <%= @the_all.dob %>
+  </dd>
+
+  <dt>
+    Original Price
+  </dt>
+  <dd>
+    <%= @the_all.original_price %>
+  </dd>
+
+  <dt>
+    Selling Price
+  </dt>
+  <dd>
+    <%= @the_all.selling_price %>
+  </dd>
+
+  <dt>
+    Brand
+  </dt>
+  <dd>
+    <%= @the_all.brand %>
+  </dd>
+
+  <dt>
+    Description
+  </dt>
+  <dd>
+    <%= @the_all.bio %>
+  </dd>
+
+  <dt>
+    Owner
+  </dt>
+  <dd>
+    <%= @the_all.owner %>
+  </dd>
+
+  <dt>
+    Image
+  </dt>
+  <dd>
+    <img src="<%= @the_all.image %>" style="width:250px;">
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@the_all.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@the_all.updated_at) %> ago
+  </dd>
+</dl>
+
+<hr>
+
+<h2>Filmography</h2>
+
+<table border="1">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Image
+    </th>
+
+    <th>
+      Title
+    </th>
+
+    <th>
+      Year
+    </th>
+
+    <th>
+      Director
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @the_director.filmography.each do |a_movie| %>
+    <tr>
+      <td>
+        <%= a_movie.id %>
+      </td>
+
+      <td>
+        <img src="<%= a_movie.image %>" style="width:250px;">
+      </td>
+
+      <td>
+        <%= a_movie.title %>
+      </td>
+
+      <td>
+        <%= a_movie.year %>
+      </td>
+
+      <td>
+        <%= a_movie.director.name %>
+      </td>
+
+      <td>
+        <a href="/movies/<%= a_movie.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
