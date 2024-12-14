@@ -1,222 +1,236 @@
-<h1>
-  All #<%= @the_all.id %> details
-</h1>
-
-<div>
-  <a href="/directors">
-    Go back
-  </a>
-</div>
-
-<div>
-  <a href="/delete_all/<%= @the_all.id %>">
-    Delete item
-  </a>
-</div>
-
-<hr>
-
-<form action="/modify_all/<%= @the_all.id %>" method="post">
-  <div>
-    <label for="name_box">
-      Name
-    </label>
-
-    <input type="text" id="name_box" name="query_name" value="<%= @the_all.name %>">
-  </div>
-
-  <div>
-    <label for="space_box">
-      Space
-    </label>
-
-    <input type="text" id="space_box" name="query_space" value="<%= @the_all.space %>">
-  </div>
-
-  <div>
-    <label for="original_price_box">
-      Original price
-    </label>
-
-    <textarea id="original_price_box" name="query_original_price" rows="3"><%= @the_all.original_price %></textarea>
-  </div>
-
-  <div>
-    <label for="selling_price_box">
-      Selling price
-    </label>
-
-    <textarea id="selling_price_box" name="query_selling_price" rows="3"><%= @the_all.selling_price %></textarea>
-  </div>
-
-  <div>
-    <label for="brand_box">
-      Brand
-    </label>
-
-    <textarea id="brand_box" name="query_brand" rows="3"><%= @the_all.brand %></textarea>
-  </div>
-
-  <div>
-    <label for="description_box">
-      Description
-    </label>
-
-    <textarea id="description_box" name="query_description" rows="3"><%= @the_all.description %></textarea>
-  </div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Details</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li {
+      margin: 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #007bff;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #007bff;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    form div {
+      flex: 1 1 calc(50% - 1rem);
+      display: flex;
+      flex-direction: column;
+    }
+    form label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    form input, form textarea, form button {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    form textarea {
+      resize: vertical;
+    }
+    form button {
+      flex: 1 1 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.7rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    form button:hover {
+      background-color: #0056b3;
+    }
+    dl {
+      margin-top: 2rem;
+    }
+    dt {
+      font-weight: bold;
+      margin-top: 1rem;
+      color: #007bff;
+    }
+    dd {
+      margin-left: 1rem;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 5px;
+      margin-top: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Space Details</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>Space #<%= @the_space.id %> Details</h2>
     <div>
-    <label for="owner_box">
-      Owner
-    </label>
-
-    <textarea id="owner_box" name="query_owner" rows="3"><%= @the_all.owner %></textarea>
+      <a href="/space">&laquo; Go back</a>
+    </div>
+    <div>
+      <a href="/delete_item/<%= @the_space.id %>" style="color: red;">Delete item</a>
+    </div>
+    <hr>
+    <form action="/modify_item/<%= @the_space.id %>" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="_method" value="patch">
+      <div>
+        <label for="name_box">Name</label>
+        <input type="text" id="name_box" name="query_name" value="<%= @the_space.name %>">
+      </div>
+      <div>
+        <label for="space_box">Space</label>
+        <input type="text" id="space_box" name="query_space" value="<%= @the_space.space %>">
+      </div>
+      <div>
+        <label for="original_price_box">Original Price</label>
+        <input type="number" id="original_price_box" name="query_original_price" value="<%= @the_space.original_price %>">
+      </div>
+      <div>
+        <label for="selling_price_box">Selling Price</label>
+        <input type="number" id="selling_price_box" name="query_selling_price" value="<%= @the_space.selling_price %>">
+      </div>
+      <div>
+        <label for="brand_box">Brand</label>
+        <input type="text" id="brand_box" name="query_brand" value="<%= @the_space.brand %>">
+      </div>
+      <div>
+        <label for="condition_box">Condition</label>
+        <input type="text" id="condition_box" name="query_condition" value="<%= @the_space.condition %>">
+      </div>
+      <div>
+        <label for="description_box">Description</label>
+        <textarea id="description_box" name="query_description" rows="3"><%= @the_space.description %></textarea>
+      </div>
+      <div>
+        <label for="owner_box">Owner</label>
+        <input type="text" id="owner_box" name="query_owner" value="<%= @the_space.owner %>">
+      </div>
+      <div>
+        <label for="image_box">Update Image</label>
+        <input type="file" id="image_box" name="query_image" accept="image/*">
+      </div>
+      <button>Update item</button>
+    </form>
+    <hr>
+    <dl>
+      <dt>Name</dt>
+      <dd><%= @the_space.name %></dd>
+      <dt>Space</dt>
+      <dd><%= @the_space.space %></dd>
+      <dt>Original Price</dt>
+      <dd>$<%= @the_space.original_price %></dd>
+      <dt>Selling Price</dt>
+      <dd>$<%= @the_space.selling_price %></dd>
+      <dt>Brand</dt>
+      <dd><%= @the_space.brand %></dd>
+      <dt>Description</dt>
+      <dd><%= @the_space.description %></dd>
+      <dt>Owner</dt>
+      <dd><%= @the_space.owner %></dd>
+      <dt>Image</dt>
+      <% if @the_space.image.attached? %>
+        <dd><img src="<%= url_for(@the_space.image) %>" alt="Space Image"></dd>
+      <% else %>
+        <dd>No image available</dd>
+      <% end %>
+      <dt>Created at</dt>
+      <dd><%= time_ago_in_words(@the_space.created_at) %> ago</dd>
+      <dt>Updated at</dt>
+      <dd><%= time_ago_in_words(@the_space.updated_at) %> ago</dd>
+    </dl>
   </div>
 
-  <div>
-    <label for="image_box">
-      Image
-    </label>
-
-    <input type="text" id="image_box" name="query_image" value="<%= @the_all.image %>">
+  <!-- WhatsApp Button -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="https://wa.me/13124516328" target="_blank" style="
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease;">
+      I'm interested! Get in touch
+    </a>
   </div>
 
-  <button>
-    Update item
-  </button>
-</form>
-
-<hr>
-
-<dl>
-  <dt>
-    Name
-  </dt>
-  <dd>
-    <%= @the_all.name %>
-  </dd>
-
-  <dt>
-    Space
-  </dt>
-  <dd>
-    <%= @the_all.dob %>
-  </dd>
-
-  <dt>
-    Original Price
-  </dt>
-  <dd>
-    <%= @the_all.original_price %>
-  </dd>
-
-  <dt>
-    Selling Price
-  </dt>
-  <dd>
-    <%= @the_all.selling_price %>
-  </dd>
-
-  <dt>
-    Brand
-  </dt>
-  <dd>
-    <%= @the_all.brand %>
-  </dd>
-
-  <dt>
-    Description
-  </dt>
-  <dd>
-    <%= @the_all.bio %>
-  </dd>
-
-  <dt>
-    Owner
-  </dt>
-  <dd>
-    <%= @the_all.owner %>
-  </dd>
-
-  <dt>
-    Image
-  </dt>
-  <dd>
-    <img src="<%= @the_all.image %>" style="width:250px;">
-  </dd>
-
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@the_all.created_at) %> ago
-  </dd>
-
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@the_all.updated_at) %> ago
-  </dd>
-</dl>
-
-<hr>
-
-<h2>Filmography</h2>
-
-<table border="1">
-  <tr>
-    <th>
-      ID
-    </th>
-
-    <th>
-      Image
-    </th>
-
-    <th>
-      Title
-    </th>
-
-    <th>
-      Year
-    </th>
-
-    <th>
-      Director
-    </th>
-
-    <th>
-    </th>
-  </tr>
-
-  <% @the_director.filmography.each do |a_movie| %>
-    <tr>
-      <td>
-        <%= a_movie.id %>
-      </td>
-
-      <td>
-        <img src="<%= a_movie.image %>" style="width:250px;">
-      </td>
-
-      <td>
-        <%= a_movie.title %>
-      </td>
-
-      <td>
-        <%= a_movie.year %>
-      </td>
-
-      <td>
-        <%= a_movie.director.name %>
-      </td>
-
-      <td>
-        <a href="/movies/<%= a_movie.id %>">
-          Show details
-        </a>
-      </td>
-    </tr>
-  <% end %>
-</table>
+  <footer>
+    <p>&copy; 2024 Booth Inventory. All rights reserved.</p>
+  </footer>
+</body>
+</html>

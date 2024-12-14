@@ -1,169 +1,247 @@
-<h1>
-  List of all items
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List of all items</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li {
+      margin: 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #007bff;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #007bff;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    form div {
+      flex: 1 1 calc(50% - 1rem);
+      display: flex;
+      flex-direction: column;
+    }
+    form label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    form input, form select, form textarea, form button {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    form button {
+      flex: 1 1 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.7rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    form button:hover {
+      background-color: #0056b3;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    table th, table td {
+      padding: 1rem;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    table th {
+      background-color: #007bff;
+      color: white;
+    }
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    table img {
+      max-width: 50px;
+      border-radius: 5px;
+    }
+    table a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    table a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>List of all items</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
 
-<hr>
+    
 
-<form action="/insert_all" method="post">
-  <div>
-    <label for="name_box">
-      Name
-    </label>
+    <!-- Formulario de Creación -->
+    <h2>Create a New Item</h2>
+    <form action="/insert_item" method="post" enctype="multipart/form-data">
+      <div>
+        <label for="name_box">Name</label>
+        <input type="text" id="name_box" name="query_name">
+      </div>
+      <div>
+        <label for="space_box">Space</label>
+        <input type="text" id="space_box" name="query_space">
+      </div>
+      <div>
+        <label for="original_price_box">Original Price</label>
+        <input type="number" id="original_price_box" name="query_original_price">
+      </div>
+      <div>
+        <label for="selling_price_box">Selling Price</label>
+        <input type="number" id="selling_price_box" name="query_selling_price">
+      </div>
+      <div>
+        <label for="brand_box">Brand</label>
+        <input type="text" id="brand_box" name="query_brand">
+      </div>
+      <div>
+        <label for="condition_box">Condition</label>
+        <input type="text" id="condition_box" name="query_condition">
+      </div>
+      <div>
+        <label for="description_box">Description</label>
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+      <div>
+        <label for="owner_box">Owner</label>
+        <input type="text" id="owner_box" name="query_owner">
+      </div>
+      <div>
+        <label for="image_box">Image</label>
+        <input type="file" id="image_box" name="query_image" accept="image/*">
+      </div>
+      <button>Create Item</button>
+    </form>
 
-    <input type="text" id="name_box" name="query_name">
+    <!-- Tabla de Resultados -->
+
+    <!-- Formulario de Filtro -->
+    <h2>Filter by Space Type</h2>
+    <form action="/space" method="get">
+      <div>
+        <label for="space_filter">Choose a Space Type:</label>
+        <select id="space_filter" name="space_type">
+          <option value="">All</option>
+          <% @space_types.each do |type| %>
+            <option value="<%= type %>" <%= params[:space_type] == type ? "selected" : "" %>><%= type %></option>
+          <% end %>
+        </select>
+      </div>
+      <button type="submit">Filter</button>
+    </form>
+
+    <h2>Items Overview</h2>
+
+    
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Space</th>
+        <th>Original Price</th>
+        <th>Selling Price</th>
+        <th>Brand</th>
+        <th>Condition</th>
+        <th>Description</th>
+        <th>Owner</th>
+        <th>Actions</th>
+      </tr>
+      <% @list_of_space.each do |space| %>
+      <tr>
+        <td><%= space.id %></td>
+        <td>
+          <% if space.image.attached? %>
+            <img src="<%= url_for(space.image) %>" alt="Item Image" style="max-width: 50px; border-radius: 5px;">
+          <% else %>
+            No Image
+          <% end %>
+        </td>
+        <td><%= space.name %></td>
+        <td><%= space.space %></td>
+        <td><%= space.original_price %></td>
+        <td><%= space.selling_price %></td>
+        <td><%= space.brand %></td>
+        <td><%= space.condition %></td>
+        <td><%= space.description %></td>
+        <td><%= space.owner %></td>
+        <td><a href="/space/<%= space.id %>">Show Details</a></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
-
-  <div>
-    <label for="space_box">
-      Space
-    </label>
-
-    <input type="text" id="space_box" name="query_space">
-  </div>
-
-  <div>
-    <label for="original_price_box">
-      Original Price
-    </label>
-
-    <input type="number" id="original_price_box" name="query_original_price">
-  </div>
-
-  <div>
-    <label for="selling_price_box">
-      Selling Price
-    </label>
-
-    <input type="number" id="selling_price_box" name="query_selling_price">
-  </div> 
-
-  <div>
-    <label for="brand_box">
-      Brand
-    </label>
-
-    <input type="text" id="brand_box" name="query_brand">
-  </div> 
-
-  <div>
-    <label for="description_box">
-      Description
-    </label>
-
-    <textarea id="description_box" name="query_description" rows="3"></textarea>
-  </div>
-
-  <div>
-    <label for="owner_box">
-      Owner
-    </label>
-
-    <input type="text" id="owner_box" name="query_owner">
-  </div> 
-
-
-  <div>
-    <label for="image_box">
-      Image
-    </label>
-
-    <input type="text" id="image_box" name="query_image">
-  </div>
-
-  <button>
-    Create item
-  </button>
-</form>
-
-<hr>
-
-<table border="1">
-  <tr>
-    <th>
-      ID
-    </th>
-
-    <th>
-      Image
-    </th>
-
-    <th>
-      Name
-    </th>
-
-    <th>
-      Space
-    </th>
-
-    <th>
-      Original Price
-    </th>
-  
-
-    <th>
-      Selling Price
-    </th>
-
-
-    <th>
-      Brand
-    </th>
-
-
-    <th>
-      Description
-    </th>
-
-    <th>
-      Owner
-    </th>
-
-    <th>
-    </th>
-  </tr>
-
-  <% @list_of_all.each do |all| %>
-  <tr>
-    <td>
-      <%= all.id %>
-    </td>
-
-    <td>
-      <img src="<%= all.image %>" style="width:250px;">
-    </td>
-
-    <td>
-      <%= all.name %>
-    </td>
-
-    <td>
-      <%= all.original_price %>
-    </td>
-
-    <td>
-      <%= all.selling_price %>
-    </td>
-
-
-    <td>
-      <%= all.brand %>
-    </td>
-
-
-    <td>
-      <%= all.description %>
-    </td>
-
-
-    <td>
-      <%= all.owner %>
-    </td>
-
-    <td>
-      <a href="/all/<%= all.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <% end %>
-</table>
+  <footer>
+    <p>&copy; 2024 Booth Inventory. All rights reserved.</p>
+  </footer>
+</body>
+</html>

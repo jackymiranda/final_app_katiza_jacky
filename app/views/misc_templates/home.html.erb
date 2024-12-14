@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Items Homepage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #444;
+      padding: 0.5rem;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      margin: 0 1rem;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
+    }
+    .category-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+      width: 180px;
+    }
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+    .category-card img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+    }
+    .category-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      color: #007bff;
+    }
+    .category-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      padding: 0.5rem 1rem;
+    }
+    .category-card a:hover {
+      background-color: #007bff;
+      color: white;
+      border-radius: 0 0 10px 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Our Items Store</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+
+    <div class="categories">
+  <!-- All Items -->
+  <div class="category-card">
+    <a href="/space?space_type=All">
+      <img src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=2948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="All Items">
+      <h3>All</h3>
+    </a>
+  </div>
+
+  <!-- Living Room -->
+  <div class="category-card">
+    <a href="/space?space_type=Living Room">
+      <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Living Room">
+      <h3>Living Room</h3>
+    </a>
+  </div>
+
+  <!-- Kitchen -->
+  <div class="category-card">
+    <a href="/space?space_type=Kitchen">
+      <img src="https://plus.unsplash.com/premium_photo-1661317296820-16fd638ee06f?q=80&w=2666&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Kitchen">
+      <h3>Kitchen</h3>
+    </a>
+  </div>
+
+  <!-- Bedroom -->
+  <div class="category-card">
+    <a href="/space?space_type=Bedroom">
+      <img src="https://plus.unsplash.com/premium_photo-1670076515907-2736a3492f23?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bedroom">
+      <h3>Bedroom</h3>
+    </a>
+  </div>
+
+  <!-- Bathroom -->
+  <div class="category-card">
+    <a href="/space?space_type=Bathroom">
+      <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bathroom">
+      <h3>Bathroom</h3>
+    </a>
+  </div>
+
+      <!-- Other -->
+      <div class="category-card">
+        <a href="/space?space_type=Other">
+          <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTczNzB8MHwxfGFsbHx8fHx8fHx8fDE2MzQ4MTMzMTk&ixlib=rb-1.2.1&q=80&w=200" alt="Other">
+          <h3>Other</h3>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
